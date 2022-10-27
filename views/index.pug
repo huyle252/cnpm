@@ -1,0 +1,24 @@
+h1 Danh Sách Từ
+
+a(href="/create") Thêm Từ Mới
+
+form(action="/search", method="GET")
+    label Tìm từ Tiếng Việt
+    br
+    input(type="text", name="q")
+    button Search
+form(action="/search2", method="GET")
+    label Tìm từ Tiếng Bana
+    br
+    input(type="text", name="q")
+    button Search
+
+label Tiếng Việt
+ul
+    each word in words
+        li= word.name
+
+label Tiếng Bana
+ul
+    each word in words
+        li= word.name2
