@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thêm Từ Mới</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container">
+    <header class="header">
+      <h1 id="title" class="text-center">
+        Thêm Từ Mới
+      </h1>
+    </header>
+    <form id="survey-form" method="POST" action="/create">
+      <div class="form-group">
+        <label for="name" id="name-label">Tiếng Việt</label>
+        <input type="text" name="Vietnamese" id="Vietnamese" class="form-control" placeholder="Điền từ..." required />
+      </div>
+
+      <div class="form-group">
+        <label id="name-label" for="name">Tiếng Bana</label>
+        <input type="text" name="Bahnaric" id="Bahnaric" class="form-control" placeholder="Điền từ..." required />
+      </div>
+
+      <div class="form-group">
+        <button type="submit" id="submit" class="submit-button" >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('survey-form').reset()
+  </script>
+</body>
+
+</html>
