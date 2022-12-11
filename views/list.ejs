@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Danh Sách Từ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Tiếng Việt</th>
+            <th>Tiếng Bana </th>
+            <th>Loại Từ</th>
+            <th>Bình Định </th>
+            <th>Kon Tum </th>
+            <th>Gia Lai</th>
+        </tr>
+        <% Word.forEach(function(item){ %>
+        <tr>
+            <td><%= item.Vietnamese%></td>
+            <td><%= item.Bahnaric %></td>
+            <td><%= item.PoS%></td>
+            <td><%= item.BinhDinh %></td>
+            <td><%= item.KonTum%></td>
+            <td><%= item.GiaLai%></td>
+        
+        </tr>
+        <% }) %>
+        </table>
+  </body>
+  
+  </html>

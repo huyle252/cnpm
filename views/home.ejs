@@ -8,29 +8,8 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Users</h1>
-  <table>
-    <tr>
-        <th>Tiếng Việt</th>
-        <th>Tiếng Bana </th>
-        <th>Loại Từ</th>
-        <th>Bình Định </th>
-        <th>Kon Tum </th>
-        <th>Gia Lai</th>
-    </tr>
-    <% Word.forEach(function(item){ %>
-    <tr>
-        <td><%= item.Vietnamese%></td>
-        <td><%= item.Bahnaric %></td>
-        <td><%= item.PoS%></td>
-        <td><%= item.BinhDinh %></td>
-        <td><%= item.KonTum%></td>
-        <td><%= item.GiaLai%></td>
-    
-    </tr>
-    <% }) %>
-    </table>
     <a href="/create">Tạo từ mới. </a>
+    <a href="/list"> Danh Sách Từ</a>
   </body>
   
   </html>
