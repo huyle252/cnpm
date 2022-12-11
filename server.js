@@ -3,9 +3,9 @@ const app = express();
 const server = require("http").Server(app);
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const multer = require('multer')
 const url = `mongodb+srv://huyle252:family9788vn@cluster0.ote7who.mongodb.net/test`;
-const path = require("path");
+var MongoClient = require('mongodb').MongoClient;
+
 
 mongoose.connect(url, {
   useNewUrlParser: true,
@@ -14,7 +14,12 @@ mongoose.connect(url, {
 
 const wordSchema = new mongoose.Schema(
   {
-    data: Object,
+    Vietnamese: String,
+    Bahnaric: String,
+    PoS: String,
+    BinhDinh: String,
+    KonTum: String,
+    GiaLai: String
   },
   { collection: `words` }
 );
@@ -33,28 +38,34 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
-app.get('/', (req, res) => {
+
+app.get('/', (req,res) => {
   res.render('home');
-  
-})
+});
+app.get('/list', (req, res, next) => {
+  Word.find({}, function(err, allWord) {
+    if (err) throw err;
+    else {
+  res.render('list',{ Word: allWord })};
+  });
+});
 app.get("/create", (req, res) => {
   res.render("index");
 });
 
 app.post("/create", urlencodedParser, (req, res) => {
   wordData(req.body);
-  res.render("success", { name: req.body.name });
-  res.redirect('home');
+  res.render('sound');
 });
 
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads')
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now())
-  }
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  var dbo = db.db("mydb");
+  dbo.collection("customers").find({}).toArray(function(err, result) {
+    if (err) throw err;
+    console.log(result);
+    db.close();
+  });
 });
-  
 
 server.listen(3000);
