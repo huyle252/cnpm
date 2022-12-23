@@ -3,9 +3,8 @@ const app = express();
 const server = require("http").Server(app);
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const multer = require("multer");
 const url = `mongodb+srv://huyle252:family9788vn@cluster0.ote7who.mongodb.net/test`;
-var MongoClient = require('mongodb').MongoClient;
-
 
 mongoose.connect(url, {
   useNewUrlParser: true,
@@ -46,8 +45,9 @@ app.get('/list', (req, res, next) => {
   Word.find({}, function(err, allWord) {
     if (err) throw err;
     else {
-  res.render('list',{ Word: allWord })};
-  });
+    res.render('list',{ Word: allWord });
+    };
+});
 });
 app.get("/create", (req, res) => {
   res.render("index");
@@ -58,4 +58,42 @@ app.post("/create", urlencodedParser, (req, res) => {
   res.render('sound');
 });
 
-server.listen(3001);
+app.get('/list/search', (req, res, next) => {
+    let bana = [req.query.Bahnaric].flat();
+    let query = {
+    Bahnaric: {
+         "$in": bana
+     }
+    }
+    Word.find(query, function (err, foundWord) {
+         if (err) {
+             console.log(err);
+         } else {
+             res.send({Word: foundWord});
+         }
+     });
+  }
+)
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+   cb(null, './audio/newwords');
+  },
+  filename: (req, file, callback) => {
+    callback(null, file.originalname);
+  }
+});
+
+var upload = multer({ storage: storage })
+
+app.post('/uploadfile', upload.single('audiosound'), (req, res, next) => {
+  const file = req.file
+  if (!file) {
+    const error = new Error('Please upload a file')
+    error.httpStatusCode = 400
+    return next(error)
+  }
+  res.send(file)
+})
+
+server.listen(3000);

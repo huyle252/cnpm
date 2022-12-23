@@ -2,14 +2,26 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Thêm Từ Mới</title>
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
 </head>
 <body>
     <a href="/create">Tạo từ mới. </a>
     <a href="/list"> Danh Sách Từ</a>
+    <form action="/list/search" method="GET">
+      <legend>Tìm từ</legend>
+    <input type="search" name="Bahnaric">
+    <button type="submit">Submit</button>
+  </form>
+      <br />
+    <form action="/uploadfile" method="POST">
+      <label>Thêm file âm thanh</label>
+      <input type="file" name="audiosound" /> <br />
+      <input type="submit" value="Submit" />
+      <br />
+   </form>
   </body>
-  
   </html>
